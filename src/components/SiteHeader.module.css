@@ -1,0 +1,217 @@
+.header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 40;
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--ink-void) 78%, transparent),
+    transparent
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--shell-pad);
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  color: var(--text-display);
+  text-decoration: none;
+  min-height: 44px;
+}
+
+.brandName {
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav {
+  margin-inline-start: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 0.75em;
+  font-size: var(--step--1);
+  text-decoration: none;
+  color: var(--text-dim);
+  transition: color var(--dur-exit) var(--ease-out);
+}
+
+.navLink:hover,
+.navLink[aria-current="page"] {
+  color: var(--text-display);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.4em 1.15em;
+  border-radius: 999px;
+  border: 1px solid var(--surface-border-strong);
+  font-size: var(--step--1);
+  text-decoration: none;
+  color: var(--text-display);
+  white-space: nowrap;
+  transition:
+    border-color var(--dur-exit) var(--ease-out),
+    background-color var(--dur-exit) var(--ease-out);
+}
+
+.cta:hover {
+  border-color: var(--cyan);
+  background: color-mix(in srgb, var(--violet) 22%, transparent);
+}
+
+/* Story progress. Secondary information — hidden from screen readers, which
+   already get scene position from the heading structure. */
+.progress {
+  display: none;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.progressBar {
+  width: 4rem;
+  height: 1px;
+  background: var(--surface-border-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.progressFill {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  background: var(--cyan);
+  transform-origin: left center;
+}
+
+.skipExperience {
+  border: 0;
+  background: none;
+  padding: 0.4em 0.75em;
+  min-height: 44px;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.skipExperience:hover {
+  color: var(--text-display);
+}
+
+/* Mobile: collapse to brand + menu toggle + CTA. */
+.menuToggle {
+  display: none;
+}
+
+@media (min-width: 62rem) {
+  .progress {
+    display: flex;
+  }
+}
+
+@media (max-width: 48rem) {
+  .navList,
+  .skipExperience {
+    display: none;
+  }
+
+  /* Brand, menu and CTA must all fit at 390px. The wordmark is the first thing
+     to go — the monogram still carries the identity, and the studio name is in
+     the page title, the h1 and the footer. */
+  .brandName {
+    display: none;
+  }
+
+  .navOpen .brandName {
+    display: inline;
+  }
+
+  .inner {
+    gap: var(--space-xs);
+  }
+
+  .cta {
+    padding-inline: 0.9em;
+  }
+
+  .menuToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border: 1px solid var(--surface-border-strong);
+    border-radius: 999px;
+    background: none;
+    cursor: pointer;
+    color: var(--text-display);
+  }
+
+  .navOpen .navList {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-s);
+    padding: var(--shell-pad);
+    background: var(--ink-900);
+  }
+
+  .navOpen .navLink {
+    font-size: var(--step-2);
+  }
+
+  .navOpen .skipExperience {
+    display: inline-flex;
+    position: fixed;
+    inset-block-end: var(--space-l);
+    inset-inline-start: var(--shell-pad);
+    z-index: 51;
+  }
+}

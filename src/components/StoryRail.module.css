@@ -1,0 +1,180 @@
+.rail {
+  position: relative;
+  z-index: 1;
+}
+
+/* Each scene gets a full viewport of scroll so the timeline has room to read.
+   Tier D collapses this to natural document flow.
+
+   Top padding clears the fixed header so a vertically centred copy block can
+   never sit underneath the navigation. */
+.scene {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--header-h) + var(--space-l)) var(--space-xl);
+  scroll-margin-top: var(--header-h);
+}
+
+.scene[data-density="dense"] {
+  min-height: auto;
+  padding-block: var(--space-2xl);
+}
+
+.semantic .scene {
+  min-height: auto;
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--surface-border);
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--shell-pad);
+}
+
+/* Reserve a calm reading zone. Copy never fills the full width of the frame. */
+.copy {
+  max-width: 34ch;
+}
+
+.scene[data-align="end"] .copy {
+  margin-inline-start: auto;
+}
+
+.scene[data-align="centre"] .copy {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-m);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.metaRule {
+  flex: 1;
+  height: 1px;
+  max-width: 6rem;
+  background: linear-gradient(
+    to right,
+    var(--surface-border-strong),
+    transparent
+  );
+}
+
+.headline {
+  font-size: var(--step-3);
+  margin-bottom: var(--space-s);
+}
+
+.scene[data-emphasis="final"] .headline {
+  font-size: var(--step-4);
+}
+
+.support {
+  font-size: var(--step-1);
+  color: var(--text-dim);
+  max-width: var(--measure);
+  line-height: 1.35;
+}
+
+.learns {
+  margin-top: var(--space-m);
+  max-width: var(--measure);
+  color: var(--text-body);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+  list-style: none;
+  padding: 0;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  padding: 0.5em 1.1em;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 999px;
+  font-size: var(--step--1);
+  text-decoration: none;
+  color: var(--text-display);
+  background: color-mix(in srgb, var(--ink-800) 55%, transparent);
+  backdrop-filter: blur(6px);
+  transition:
+    border-color var(--dur-exit) var(--ease-out),
+    background-color var(--dur-exit) var(--ease-out);
+}
+
+.link:hover {
+  border-color: var(--cyan);
+  background: color-mix(in srgb, var(--ink-700) 60%, transparent);
+}
+
+.actMark {
+  color: var(--violet-bright);
+}
+
+/* Final scene CTA pair. */
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-top: var(--space-l);
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.65em 1.6em;
+  border-radius: 999px;
+  background: var(--violet);
+  color: #ffffff;
+  font-size: var(--step-0);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color var(--dur-exit) var(--ease-out);
+}
+
+.ctaPrimary:hover {
+  background: color-mix(in srgb, var(--violet) 80%, #ffffff 20%);
+}
+
+.ctaSecondary {
+  composes: link;
+  min-height: 48px;
+  padding: 0.65em 1.6em;
+  font-size: var(--step-0);
+}
+
+@media (max-width: 48rem) {
+  .scene {
+    /* Mobile-light reduces scroll distance; copy still gets a full screen. */
+    min-height: 88svh;
+  }
+
+  .copy {
+    max-width: none;
+  }
+
+  .scene[data-align="end"] .copy {
+    margin-inline-start: 0;
+  }
+}

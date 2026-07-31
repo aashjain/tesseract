@@ -1,0 +1,125 @@
+.form {
+  max-width: 34rem;
+  margin-block-start: var(--space-l);
+  display: grid;
+  gap: var(--space-m);
+}
+
+.row {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 0.4em;
+}
+
+.label {
+  font-size: var(--step--1);
+  color: var(--text-dim);
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+}
+
+.required,
+.optional {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.required {
+  color: var(--violet-bright);
+}
+
+.optional {
+  color: var(--text-muted);
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.65em 0.9em;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ink-800) 70%, transparent);
+  color: var(--text-display);
+  transition: border-color var(--dur-exit) var(--ease-out);
+}
+
+.input:hover {
+  border-color: var(--text-muted);
+}
+
+textarea.input {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--magenta);
+}
+
+.error {
+  font-size: var(--step--1);
+  color: var(--magenta);
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75em;
+  font-size: var(--step--1);
+  color: var(--text-dim);
+  cursor: pointer;
+  padding-block: 0.5em;
+}
+
+.consent input {
+  width: 20px;
+  height: 20px;
+  margin-block-start: 0.15em;
+  accent-color: var(--violet);
+  flex-shrink: 0;
+}
+
+.submit {
+  justify-self: start;
+  min-height: 48px;
+  padding: 0.65em 2em;
+  border: 0;
+  border-radius: 999px;
+  background: var(--violet);
+  color: #ffffff;
+  font-size: var(--step-0);
+  cursor: pointer;
+  transition: background-color var(--dur-exit) var(--ease-out);
+}
+
+.submit:hover {
+  background: color-mix(in srgb, var(--violet) 80%, #ffffff 20%);
+}
+
+.success {
+  margin-block-start: var(--space-l);
+  padding: var(--space-m);
+  border: 1px solid var(--cyan);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--cyan) 10%, transparent);
+  color: var(--text-display);
+  font-size: var(--step-1);
+  max-width: 34rem;
+}
+
+.direct {
+  margin-block-start: var(--space-l);
+  color: var(--text-dim);
+}
+
+.directLink {
+  color: var(--text-display);
+}
