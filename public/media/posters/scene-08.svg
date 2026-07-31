@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="46%" r="62%">
+      <stop offset="0%" stop-color="#ff8a5b" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#ff8a5b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff8a5b" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ff8a5b" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ff8a5b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#04050c" stop-opacity="0.7"/>
+      <stop offset="45%" stop-color="#04050c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="8"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#070814"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <ellipse cx="800" cy="666" rx="330" ry="52" fill="#ff8a5b" fill-opacity="0.08"/>
+  <rect x="680" y="360" width="240" height="306" fill="#ff8a5b" fill-opacity="0.07" stroke="#f4f1ea" stroke-opacity="0.2"/>
+  <rect x="330" y="216" width="180" height="260" fill="#f4f1ea" fill-opacity="0.1" transform="skewY(8)"/>
+  <rect x="1100" y="180" width="200" height="290" fill="#f4f1ea" fill-opacity="0.06" transform="skewY(-8)"/>
+  <line x1="0" y1="666" x2="1600" y2="666" stroke="#f4f1ea" stroke-opacity="0.16"/>
+  <!-- seed 6852 -->
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+  <rect width="1600" height="900" filter="url(#grain)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

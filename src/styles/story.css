@@ -1,0 +1,678 @@
+/* The cinematic route: intro, story rail, scene copy, loader, overlays. */
+
+.story {
+  position: relative;
+  z-index: var(--z-story);
+}
+
+/* ---- Opening viewport ---------------------------------------------------- */
+
+.intro {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--header-height) + var(--space-xl)) var(--gutter) var(--space-xl);
+}
+
+.intro__inner {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-m);
+}
+
+.intro__eyebrow {
+  animation: story-rise var(--dur-slow) var(--ease-out-quint) both;
+}
+
+.intro__headline {
+  max-width: 20ch;
+  font-size: var(--step-6);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+  animation: story-rise var(--dur-slow) var(--ease-out-quint) 120ms both;
+}
+
+/* The proposition is long; hold the last clause visually apart. */
+.intro__headline::after {
+  content: '';
+  display: block;
+  width: 6rem;
+  height: 1px;
+  margin-top: var(--space-m);
+  background: linear-gradient(90deg, var(--violet-500), transparent);
+}
+
+.intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  animation: story-rise var(--dur-slow) var(--ease-out-quint) 240ms both;
+}
+
+.intro__prompt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  animation: story-rise var(--dur-slow) var(--ease-out-quint) 420ms both;
+}
+
+.intro__prompt::before {
+  content: '↓';
+  display: inline-block;
+  margin-right: 0.6em;
+  animation: story-nudge 2.4s var(--ease-in-out-quart) infinite;
+}
+
+@keyframes story-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes story-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+.skip-experience {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2xs);
+  animation: story-rise var(--dur-slow) var(--ease-out-quint) 320ms both;
+}
+
+.skip-experience__button {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-medium);
+  text-underline-offset: 0.3em;
+  min-height: 44px;
+}
+
+.skip-experience__hint {
+  font-size: var(--step--2);
+  color: var(--text-tertiary);
+}
+
+.story__return {
+  padding: var(--space-2xl) var(--gutter);
+  text-align: center;
+}
+
+/* ---- Scene sections ------------------------------------------------------ */
+
+.scene {
+  --scene-weight: 1;
+  --scene-accent: var(--violet-500);
+  position: relative;
+  min-height: calc(var(--scene-weight) * 100svh);
+}
+
+.scene--cyan {
+  --scene-accent: var(--cyan-500);
+}
+
+.scene--warm {
+  --scene-accent: var(--warm-500);
+}
+
+/* In the immersive modes the copy is sticky-centred over the canvas, so the
+   camera can travel while the reading zone stays still. */
+.story--full .scene__stage,
+.story--balanced .scene__stage {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  /* `safe` keeps a tall reading zone from overflowing above the fixed header
+     instead of centring it out of view. */
+  justify-content: center;
+  justify-content: safe center;
+}
+
+.story--mobile .scene__stage {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scene__stage {
+  padding: calc(var(--header-height) + var(--space-l)) var(--gutter) var(--space-2xl);
+  width: 100%;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+/* One calm reading zone per scene, held off-centre so the 3D object keeps the
+   opposite side of the frame. */
+.scene__copy {
+  max-width: 34rem;
+  display: grid;
+  gap: var(--space-s);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-enter) var(--ease-out-quint),
+    transform var(--dur-enter) var(--ease-out-quint);
+}
+
+.scene.is-active .scene__copy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Alternate the reading zone so the journey has rhythm rather than one column. */
+.scene:nth-of-type(even) .scene__copy {
+  margin-left: auto;
+}
+
+@media (max-width: 62rem) {
+  .scene:nth-of-type(even) .scene__copy {
+    margin-left: 0;
+  }
+}
+
+.scene__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.scene__index {
+  color: var(--scene-accent);
+}
+
+.scene__rule {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.scene__headline {
+  font-size: var(--step-5);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.scene__support {
+  font-size: var(--step-1);
+  line-height: 1.4;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.scene__detail {
+  font-size: var(--step-0);
+  color: var(--text-tertiary);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+.scene__capabilities {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-2xs);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+}
+
+.scene__capability {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+  display: inline-block;
+  padding-block: 6px;
+}
+
+.scene__capability::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 0.55em;
+  vertical-align: middle;
+  background: var(--scene-accent);
+  border-radius: 50%;
+}
+
+/* ---- Proof hotspots ------------------------------------------------------ */
+
+.scene__proofs {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-s);
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.scene__proof {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-xs) var(--space-s);
+  text-align: left;
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-m);
+  background: var(--surface-glass);
+  transition:
+    border-color var(--dur-fast) var(--ease-out-quint),
+    transform var(--dur-fast) var(--ease-out-quint);
+}
+
+.scene__proof:hover,
+.scene__proof:focus-visible {
+  border-color: var(--scene-accent);
+  transform: translateX(3px);
+}
+
+.scene__proof-label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--scene-accent);
+}
+
+.scene__proof-title {
+  font-size: var(--step-0);
+}
+
+.scene__proof-client {
+  font-size: var(--step--1);
+  color: var(--text-tertiary);
+}
+
+/* ---- Scene extras -------------------------------------------------------- */
+
+.scene__people {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-s);
+  display: grid;
+  gap: var(--space-s);
+}
+
+.scene__people li {
+  display: grid;
+  gap: 2px;
+  padding-left: var(--space-s);
+  border-left: 1px solid var(--rule-soft);
+}
+
+.scene__person-name {
+  font-size: var(--step-0);
+}
+
+.scene__person-role {
+  font-size: var(--step--1);
+  color: var(--text-tertiary);
+}
+
+.scene__person-belief {
+  font-size: var(--step--1);
+  color: var(--warm-200);
+  text-wrap: pretty;
+}
+
+.scene__final {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-top: var(--space-s);
+}
+
+.scene__still {
+  width: 100%;
+  height: auto;
+  margin-top: var(--space-m);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-m);
+}
+
+.scene__act {
+  margin-top: var(--space-l);
+  color: var(--text-tertiary);
+}
+
+.story--full .scene__act,
+.story--balanced .scene__act,
+.story--mobile .scene__act {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--space-l);
+  margin: 0;
+  writing-mode: vertical-rl;
+}
+
+@media (max-width: 62rem) {
+  .story--full .scene__act,
+  .story--balanced .scene__act,
+  .story--mobile .scene__act {
+    display: none;
+  }
+}
+
+/* ---- Explore dimensions -------------------------------------------------- */
+
+.dimensions {
+  margin-top: var(--space-s);
+}
+
+.dimensions__panel {
+  margin-top: var(--space-s);
+  padding: var(--space-m);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-l);
+  background: var(--surface-raised);
+  backdrop-filter: blur(10px);
+}
+
+.dimensions__panel[hidden] {
+  display: none;
+}
+
+.dimensions__title {
+  margin-bottom: var(--space-s);
+}
+
+.dimensions__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--rule-soft);
+  border-block: 1px solid var(--rule-soft);
+}
+
+.dimensions__link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 var(--space-s);
+  align-items: baseline;
+  padding: var(--space-xs) 0;
+  background: var(--ink-700);
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-out-quint);
+}
+
+.dimensions__link:hover,
+.dimensions__link:focus-visible {
+  background: var(--ink-600);
+}
+
+.dimensions__index {
+  grid-row: span 2;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--cyan-400);
+}
+
+.dimensions__name {
+  font-size: var(--step-0);
+}
+
+.dimensions__proposition {
+  grid-column: 2;
+  font-size: var(--step--1);
+  color: var(--text-tertiary);
+}
+
+.dimensions__note {
+  margin-top: var(--space-s);
+  font-size: var(--step--2);
+  color: var(--text-tertiary);
+}
+
+/* ---- Loader -------------------------------------------------------------- */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  display: grid;
+  place-items: center;
+  background: var(--ink-900);
+  transition: opacity var(--dur-enter) var(--ease-out-quint);
+}
+
+.loader.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader__inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-s);
+}
+
+.loader__track {
+  display: block;
+  width: min(18rem, 60vw);
+  height: 1px;
+  background: var(--rule-soft);
+  overflow: hidden;
+}
+
+.loader__pulse {
+  display: block;
+  width: 34%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--violet-400), transparent);
+  animation: loader-sweep 1.7s var(--ease-in-out-quart) infinite;
+}
+
+@keyframes loader-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(390%);
+  }
+}
+
+/* ---- Project portal overlay ---------------------------------------------- */
+
+.portal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  place-items: end center;
+}
+
+.portal__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 5, 12, 0.82);
+  backdrop-filter: blur(4px);
+  animation: portal-fade var(--dur-exit) var(--ease-out-quint) both;
+}
+
+.portal__dialog {
+  position: relative;
+  width: min(46rem, 100%);
+  max-height: 92svh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-l) var(--gutter) var(--space-2xl);
+  background: var(--ink-700);
+  border: 1px solid var(--rule-soft);
+  border-bottom: 0;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+  animation: portal-rise var(--dur-enter) var(--ease-out-quint) both;
+}
+
+@media (min-width: 55rem) {
+  .portal {
+    place-items: center;
+  }
+
+  .portal__dialog {
+    max-height: 86svh;
+    border-bottom: 1px solid var(--rule-soft);
+    border-radius: var(--radius-l);
+  }
+}
+
+@keyframes portal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes portal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.portal__title {
+  margin-top: var(--space-2xs);
+  font-size: var(--step-3);
+  font-weight: 400;
+}
+
+.portal__notice {
+  margin-top: var(--space-s);
+  padding: var(--space-2xs) var(--space-xs);
+  border-left: 2px solid var(--warm-500);
+  font-size: var(--step--1);
+  color: var(--warm-200);
+}
+
+.portal__hero {
+  width: 100%;
+  height: auto;
+  margin-top: var(--space-m);
+  border-radius: var(--radius-m);
+}
+
+.portal__facts {
+  margin-top: var(--space-l);
+  display: grid;
+  gap: var(--space-m);
+}
+
+.portal__facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-3xs);
+}
+
+.portal__facts dd {
+  margin: 0;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.portal__list {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 2px;
+}
+
+.portal__cta {
+  margin-top: var(--space-l);
+}
+
+/* ---- Semantic (Tier D) presentation -------------------------------------- */
+
+.story--fallback .scene,
+.story--reduced .scene {
+  min-height: 0;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.story--fallback .scene__copy,
+.story--reduced .scene__copy {
+  opacity: 1;
+  transform: none;
+  max-width: 44rem;
+}
+
+.story--fallback .scene__stage,
+.story--reduced .scene__stage {
+  padding-block: var(--space-2xl);
+}
+
+/* ---- Canvas host --------------------------------------------------------- */
+
+/* One persistent canvas, fixed behind the story rail. It is decorative: every
+   word, link and control it illustrates exists as HTML in front of it. */
+.canvas-host {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-canvas);
+  pointer-events: none;
+}
+
+.canvas-host canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* The final still lockup, shown once the G has resolved. */
+.scene__lockup {
+  display: grid;
+  gap: var(--space-s);
+  margin-top: var(--space-l);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--rule-soft);
+}
+
+.scene__lockup-mark {
+  width: clamp(5rem, 11vw, 8rem);
+  height: auto;
+  color: var(--text-primary);
+}
+
+.scene__lockup-caption {
+  font-size: var(--step--2);
+  color: var(--text-tertiary);
+  max-width: var(--measure);
+}

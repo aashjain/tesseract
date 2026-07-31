@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="46%" r="62%">
+      <stop offset="0%" stop-color="#28b7ff" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#28b7ff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#28b7ff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#28b7ff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#28b7ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#04050c" stop-opacity="0.7"/>
+      <stop offset="45%" stop-color="#04050c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="9"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#070814"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <rect x="839.0" y="291.5" width="182.0" height="217.0" rx="2.1" fill="#28b7ff" fill-opacity="0.100" stroke="#28b7ff" stroke-opacity="0.15" stroke-width="1.5"/><rect x="779.2" y="261.2" width="249.6" height="297.6" rx="2.9" fill="#28b7ff" fill-opacity="0.088" stroke="#28b7ff" stroke-opacity="0.22" stroke-width="1.5"/><rect x="719.4" y="230.9" width="317.2" height="378.2" rx="3.7" fill="#28b7ff" fill-opacity="0.076" stroke="#28b7ff" stroke-opacity="0.29" stroke-width="1.5"/><rect x="659.6" y="200.6" width="384.8" height="458.8" rx="4.4" fill="#28b7ff" fill-opacity="0.064" stroke="#28b7ff" stroke-opacity="0.36" stroke-width="1.5"/><rect x="599.8" y="170.3" width="452.4" height="539.4" rx="5.2" fill="#28b7ff" fill-opacity="0.052" stroke="#28b7ff" stroke-opacity="0.43" stroke-width="1.5"/><rect x="540.0" y="140.0" width="520.0" height="620.0" rx="6.0" fill="#28b7ff" fill-opacity="0.040" stroke="#28b7ff" stroke-opacity="0.50" stroke-width="1.5"/><!-- seed 7829 -->
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+  <rect width="1600" height="900" filter="url(#grain)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

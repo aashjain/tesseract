@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="46%" r="62%">
+      <stop offset="0%" stop-color="#28b7ff" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#28b7ff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#28b7ff" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#28b7ff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#28b7ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#04050c" stop-opacity="0.7"/>
+      <stop offset="45%" stop-color="#04050c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="4"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#070814"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <line x1="512" y1="630" x2="512" y2="108" stroke="#f4f1ea" stroke-opacity="0.12" stroke-width="1"/><line x1="512" y1="630" x2="1472" y2="630" stroke="#f4f1ea" stroke-opacity="0.12" stroke-width="1"/><line x1="512" y1="630" x2="725.3" y2="340.8" stroke="#28b7ff" stroke-opacity="0.16" stroke-width="1"/><circle cx="725.3" cy="340.8" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="838.4" y2="386.2" stroke="#28b7ff" stroke-opacity="0.20" stroke-width="1"/><circle cx="838.4" cy="386.2" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="789.1" y2="196.9" stroke="#28b7ff" stroke-opacity="0.10" stroke-width="1"/><circle cx="789.1" cy="196.9" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="883.4" y2="392.6" stroke="#28b7ff" stroke-opacity="0.20" stroke-width="1"/><circle cx="883.4" cy="392.6" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="699.8" y2="433.8" stroke="#28b7ff" stroke-opacity="0.11" stroke-width="1"/><circle cx="699.8" cy="433.8" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="888.2" y2="383.0" stroke="#28b7ff" stroke-opacity="0.09" stroke-width="1"/><circle cx="888.2" cy="383.0" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="740.8" y2="346.0" stroke="#28b7ff" stroke-opacity="0.09" stroke-width="1"/><circle cx="740.8" cy="346.0" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="822.6" y2="317.0" stroke="#28b7ff" stroke-opacity="0.13" stroke-width="1"/><circle cx="822.6" cy="317.0" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="960.9" y2="284.8" stroke="#28b7ff" stroke-opacity="0.14" stroke-width="1"/><circle cx="960.9" cy="284.8" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="949.7" y2="455.0" stroke="#28b7ff" stroke-opacity="0.15" stroke-width="1"/><circle cx="949.7" cy="455.0" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="741.9" y2="203.3" stroke="#28b7ff" stroke-opacity="0.13" stroke-width="1"/><circle cx="741.9" cy="203.3" r="3" fill="#28b7ff" opacity="0.3"/><line x1="512" y1="630" x2="1376" y2="216" stroke="url(#rail)" stroke-width="3"/><circle cx="1376" cy="216" r="7" fill="#28b7ff"/>
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+  <rect width="1600" height="900" filter="url(#grain)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

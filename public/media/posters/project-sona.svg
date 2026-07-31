@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="46%" r="62%">
+      <stop offset="0%" stop-color="#ff8a5b" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#ff8a5b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff8a5b" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#ff8a5b" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ff8a5b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#04050c" stop-opacity="0.7"/>
+      <stop offset="45%" stop-color="#04050c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#04050c" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="25"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#070814"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <rect x="460" y="200" width="680" height="500" fill="none" stroke="#f4f1ea" stroke-opacity="0.18"/><path d="M500 570 C 680 230, 920 670, 1100 330" fill="none" stroke="#ff8a5b" stroke-opacity="0.65" stroke-width="18" stroke-linecap="round"/><path d="M500 610 C 680 270, 920 710, 1100 370" fill="none" stroke="#ff8a5b" stroke-opacity="0.2" stroke-width="8"/><circle cx="682.6" cy="828.5" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="389.4" cy="343.9" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="1229.5" cy="530.6" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="783.2" cy="55.7" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="449.1" cy="57.2" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="1027.1" cy="432.5" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="850.5" cy="782.0" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="682.1" cy="323.4" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="316.0" cy="6.3" r="2" fill="#f4f1ea" opacity="0.3"/><circle cx="1015.6" cy="751.6" r="2" fill="#f4f1ea" opacity="0.3"/>
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+  <rect width="1600" height="900" filter="url(#grain)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>
